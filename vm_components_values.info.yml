@@ -1,0 +1,5 @@
+name: 'Virtual machine components values'
+type: module
+description: Virtual machine components values
+core: 8.x
+package: Maadix

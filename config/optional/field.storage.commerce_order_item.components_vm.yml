@@ -1,0 +1,18 @@
+dependencies:
+  module:
+    - commerce_order
+    - options
+id: commerce_order_item.components_vm
+field_name: components_vm
+entity_type: commerce_order_item
+type: list_string
+settings:
+  allowed_values: { }
+  allowed_values_function: 'vm_components_values_allowed_values_function'
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

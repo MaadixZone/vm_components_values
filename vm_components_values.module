@@ -1,0 +1,78 @@
+<?php
+
+/**
+ * @file
+ * Contains vm_components_values.module.
+ */
+
+use Drupal\Component\Utility\Random;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\field\Entity\FieldStorageConfig;
+
+/**
+ * Implements hook_help().
+ */
+function vm_components_values_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the vm_components_values module.
+    case 'help.page.vm_components_values':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Virtual machine components') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Set dynamic allowed values for the components field.
+ *
+ * @param \Drupal\field\Entity\FieldStorageConfig $definition
+ *   The field definition.
+ * @param \Drupal\Core\Entity\ContentEntityInterface|null $entity
+ *   The entity being created if applicable.
+ * @param bool $cacheable
+ *   Boolean indicating if the results are cacheable.
+ *
+ * @return array
+ *   An array of possible key and value options.
+ *
+ * @see options_allowed_values()
+ */
+function vm_components_values_allowed_values_function(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL, $cacheable) {
+  $options = [
+    'Drupal' => 'Drupal',
+    'phpmyadmin' => 'Php my admin',
+    'custom' => 'options coming from',
+    'custom i' => Random::name(),
+    'custom ii' => 'vm_components_values_allowed_values_function',
+    'custom iii' => 'Coming from vm_components_values module',
+  ];
+  // Add a custom components options for grupo nodes.
+  if ($entity->bundle() == 'variation_grupo') {
+    // API GET COMPONENTS FOR PERSONAL.
+    $options['wordpress'] = 'wordpress';
+    $options['TBD'] = '...TO BE grupo api DEFINED...';
+  }
+  // Add a custom components options for micro nodes.
+  if ($entity->bundle() == 'variation_micro') {
+    // API GET COMPONENTS FOR MICRO.
+    $options['wordpress'] = 'wordpress';
+    $options['TBD'] = '...TO BE micro api DEFINED...';
+  }
+  // Add a custom components options for personal nodes.
+  if ($entity->bundle() == 'variation_personal') {
+    // API GET COMPONENTS FOR PERSONAL.
+    $options['wordpress'] = 'wordpress';
+    $options['TBD'] = '...TO BE personal api DEFINED...';
+  }
+  // Add a custom components options for business nodes.
+  if ($entity->bundle() == 'variation_business') {
+    // API GET COMPONENTS FOR BUSINESS.
+    $options['wordpress'] = 'wordpress';
+    $options['TBD'] = '...TO BE business api DEFINED...';
+  }
+  return $options;
+}
